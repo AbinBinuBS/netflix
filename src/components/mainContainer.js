@@ -2,22 +2,27 @@ import React, { useContext } from 'react';
 import VedioTitle from './vedioTitle';
 import VedioBackground from './vedioBackground';
 import { MovieContext } from '../hooks/useNowPlayingMovies';
+import { MovieContext1 } from '../hooks/usePopularMovies';
 
 const MainContainer = () => {
     const { nowPlayingMovies } = useContext(MovieContext);
-    console.log("111111111111111111111111111111111111111111",nowPlayingMovies);
-    // Check if nowPlayingMovies is empty or undefined
+    const { popularMovies } = useContext(MovieContext1);
+
+    console.log("Now Playing Movies:", nowPlayingMovies);
+    console.log("Popular Movies:", popularMovies);
+
     if (!nowPlayingMovies || nowPlayingMovies.length === 0) {
       return <p>No now playing movies available</p>;
     }
-  
-    // Now that we're sure nowPlayingMovies has elements, proceed with accessing the first one
+
+    if (!popularMovies || popularMovies.length === 0) {
+      return <p>No popular movies available</p>;
+    }
+
     const mainMovie = nowPlayingMovies[3];
-    console.log("11111111111111111111111", mainMovie.title);
 
     return (
       <div>
-        {/* Access title and overview from mainMovie */}
         <VedioTitle title={mainMovie.title} overview={mainMovie.overview} />
         <VedioBackground movieId={mainMovie.id}/>
       </div>
